@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Educação para a Vida: conhecimentos e habilidades para construir seu futuro, em diálogo com as competências gerais da BNCC.">
+  <title>Educação para a Vida | BNCC</title>
+  <style>
+    :root {
+      --navy: #10213a;
+      --blue: #2563eb;
+      --green: #16a36a;
+      --mint: #e9fbf2;
+      --text: #263449;
+      --muted: #64748b;
+      --surface: #ffffff;
+      --background: #f5f8fc;
+      --border: #e4eaf1;
+      --shadow: 0 16px 40px rgba(24, 46, 78, .09);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      max-width: 1160px; margin: auto; padding: 13px 22px;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 850; color: var(--navy); }
+    .brand-icon { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 12px; color: white; background: linear-gradient(135deg, var(--blue), var(--green)); font-size: 21px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a { text-decoration: none; color: #42516a; font-size: .92rem; font-weight: 650; transition: color .2s; }
+    .nav-links a:hover { color: var(--green); }
+    .menu-button { display: none; border: 0; background: #eef4fa; border-radius: 10px; padding: 9px 12px; font-size: 20px; cursor: pointer; }
+    .hero {
+      position: relative; overflow: hidden; color: white;
+      background: linear-gradient(120deg, #10213a 0%, #174b75 56%, #14845f 100%);
+    }
+    .hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; background: rgba(255,255,255,.07); }
+    .hero::before { width: 380px; height: 380px; right: -100px; top: -180px; }
+    .hero::after { width: 230px; height: 230px; right: 24%; bottom: -160px; }
+    .hero-inner { position: relative; z-index: 1; max-width: 1160px; margin: auto; padding: 86px 22px 92px; display: grid; grid-template-columns: 1.25fr .75fr; align-items: center; gap: 45px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid rgba(255,255,255,.25); border-radius: 30px; background: rgba(255,255,255,.1); font-size: .83rem; font-weight: 700; letter-spacing: .04em; }
+    h1 { margin: 20px 0 16px; max-width: 700px; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.08; letter-spacing: -.04em; }
+    .hero p { max-width: 640px; color: #e2edf7; font-size: 1.1rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 12px 19px; border-radius: 12px; text-decoration: none; font-weight: 750; border: 1px solid transparent; transition: transform .2s, box-shadow .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .button-light { background: white; color: var(--navy); box-shadow: 0 8px 22px rgba(0,0,0,.15); }
+    .button-outline { color: white; border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.08); }
+    .hero-art { min-height: 290px; display: grid; place-items: center; }
+    .orbit { width: min(290px, 75vw); aspect-ratio: 1; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; display: grid; place-items: center; position: relative; background: radial-gradient(circle, rgba(255,255,255,.15), rgba(255,255,255,.02) 65%); }
+    .orbit::before, .orbit::after { content: ""; position: absolute; border: 1px dashed rgba(255,255,255,.3); border-radius: 50%; }
+    .orbit::before { inset: 23px; }
+    .orbit::after { inset: 48px; }
+    .book { z-index: 1; width: 125px; height: 145px; border-radius: 12px 18px 18px 12px; background: linear-gradient(145deg, #fff, #dceeff); color: var(--blue); display: grid; place-items: center; font-size: 64px; box-shadow: 12px 16px 0 rgba(4,22,40,.2); transform: rotate(-7deg); }
+    .orbit-label { position: absolute; z-index: 2; padding: 7px 11px; border-radius: 10px; background: white; color: var(--navy); font-size: .85rem; font-weight: 800; box-shadow: 0 7px 20px rgba(0,0,0,.15); }
+    .label-one { top: 24px; left: -20px; } .label-two { right: -30px; top: 105px; } .label-three { bottom: 20px; left: 5px; }
+    main { max-width: 1160px; margin: auto; padding: 0 22px 70px; }
+    section { scroll-margin-top: 90px; padding-top: 76px; }
+    .section-heading { max-width: 720px; margin-bottom: 28px; }
+    .kicker { color: var(--green); text-transform: uppercase; letter-spacing: .12em; font-size: .76rem; font-weight: 850; }
+    h2 { color: var(--navy); font-size: clamp(1.8rem, 3vw, 2.55rem); line-height: 1.2; margin: 8px 0 11px; letter-spacing: -.025em; }
+    .section-heading p { color: var(--muted); }
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .info-card, .topic-card, .competency-card, .activity-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); }
+    .info-card { padding: 27px; }
+    .info-card h3 { color: var(--navy); margin-bottom: 9px; font-size: 1.2rem; }
+    .info-card p { color: var(--muted); }
+    .info-icon { width: 47px; height: 47px; display: grid; place-items: center; border-radius: 14px; background: var(--mint); font-size: 25px; margin-bottom: 15px; }
+    .highlight { margin-top: 22px; border-left: 4px solid var(--green); padding: 15px 18px; background: #effaf5; color: #245b46; border-radius: 0 12px 12px 0; }
+    .topics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .topic-card { padding: 22px; transition: transform .2s, border-color .2s; }
+    .topic-card:hover { transform: translateY(-4px); border-color: #9edcc0; }
+    .topic-icon { font-size: 30px; margin-bottom: 10px; }
+    .topic-card h3 { color: var(--navy); font-size: 1.08rem; margin-bottom: 7px; }
+    .topic-card p { color: var(--muted); font-size: .94rem; }
+    .competencies { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
+    .competency-card { display: flex; gap: 15px; padding: 18px; box-shadow: none; }
+    .number { flex: 0 0 42px; width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; color: white; font-weight: 900; background: linear-gradient(135deg, var(--blue), var(--green)); }
+    .competency-card h3 { color: var(--navy); font-size: 1rem; margin: 1px 0 4px; }
+    .competency-card p { color: var(--muted); font-size: .91rem; }
+    .activity-wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 22px; align-items: stretch; }
+    .activity-card { padding: 26px; }
+    .activity-card h3 { color: var(--navy); margin-bottom: 8px; }
+    .activity-card p { color: var(--muted); }
+    .steps { margin-top: 17px; display: grid; gap: 12px; }
+    .step { display: flex; gap: 11px; align-items: flex-start; }
+    .step span { flex: 0 0 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; color: #08764a; background: var(--mint); font-weight: 850; font-size: .85rem; }
+    .goal-form { margin-top: 15px; }
+    label { display: block; color: var(--navy); font-size: .9rem; font-weight: 750; margin: 13px 0 6px; }
+    input, select, textarea { width: 100%; border: 1px solid #d6e0eb; border-radius: 10px; padding: 12px 13px; color: var(--text); background: white; font: inherit; outline: none; }
+    input:focus, select:focus, textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(22,163,106,.12); }
+    textarea { min-height: 85px; resize: vertical; }
+    .submit-button { margin-top: 15px; border: 0; width: 100%; cursor: pointer; color: white; background: linear-gradient(110deg, var(--blue), var(--green)); }
+    .goal-result { display: none; margin-top: 15px; padding: 14px; border-radius: 12px; background: var(--mint); color: #155c3e; }
+    .quote { margin-top: 70px; padding: 34px; text-align: center; color: white; border-radius: 22px; background: linear-gradient(120deg, #142b49, #176b62); box-shadow: var(--shadow); }
+    .quote .quote-mark { font-size: 38px; line-height: 1; opacity: .8; }
+    .quote p { max-width: 760px; margin: 10px auto; font-size: clamp(1.2rem, 2.7vw, 1.7rem); font-weight: 750; }
+    .quote span { color: #c5e8dc; font-size: .9rem; }
+    .source-box { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .source-box p { color: var(--muted); margin: 6px 0 15px; }
+    .source-link { color: #176b58; font-weight: 750; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    footer { background: #0f2037; color: #d5e0eb; padding: 28px 22px; text-align: center; }
+    footer p { font-size: .9rem; }
+    footer .small { margin-top: 5px; color: #9fb1c5; font-size: .8rem; }
+    @media (max-width: 850px) {
+      .hero-inner { grid-template-columns: 1fr; padding-top: 65px; }
+      .hero-art { min-height: 230px; }
+      .topics-grid { grid-template-columns: repeat(2, 1fr); }
+      .activity-wrap { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 650px) {
+      .menu-button { display: block; }
+      .nav { flex-wrap: wrap; }
+      .nav-links { display: none; flex-basis: 100%; flex-direction: column; align-items: flex-start; gap: 0; padding: 5px 0 8px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { width: 100%; padding: 10px 2px; }
+      .intro-grid, .competencies { grid-template-columns: 1fr; }
+      .topics-grid { grid-template-columns: 1fr; }
+      section { padding-top: 58px; }
+      .hero-inner { padding-bottom: 65px; }
+      .quote { padding: 27px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Navegação principal">
+      <a class="brand" href="#inicio"><span class="brand-icon">🌱</span><span>Educação para a Vida</span></a>
+      <button class="menu-button" id="menuButton" aria-label="Abrir menu" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#sobre">Sobre</a>
+        <a href="#temas">Temas</a>
+        <a href="#bncc">BNCC</a>
+        <a href="#atividade">Atividade</a>
+        <a href="#referencias">Referências</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="hero" id="inicio">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">📘 APRENDER • ESCOLHER • CONSTRUIR</span>
+        <h1>Educação para a Vida</h1>
+        <p>Aprender vai muito além da sala de aula. É desenvolver conhecimentos, atitudes e habilidades para fazer escolhas, conviver bem e construir um futuro com responsabilidade.</p>
+        <div class="hero-actions">
+          <a class="button button-light" href="#sobre">Conheça o projeto <span>→</span></a>
+          <a class="button button-outline" href="#bncc">Ver relação com a BNCC</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit">
+          <div class="book">📖</div>
+          <span class="orbit-label label-one">Conhecimento</span>
+          <span class="orbit-label label-two">Autonomia</span>
+          <span class="orbit-label label-three">Futuro</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section id="sobre">
+      <div class="section-heading">
+        <span class="kicker">01 · Entenda o tema</span>
+        <h2>O que é Educação para a Vida?</h2>
+        <p>É uma formação que ajuda o estudante a usar o que aprende para lidar com situações reais, participar da sociedade e tomar decisões conscientes.</p>
+      </div>
+      <div class="intro-grid">
+        <article class="info-card">
+          <div class="info-icon">🧭</div>
+          <h3>Aprender para o cotidiano</h3>
+          <p>Envolve aprender a organizar o tempo, cuidar da saúde, respeitar as diferenças, administrar recursos, resolver problemas e trabalhar em equipe.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-icon">🎯</div>
+          <h3>Construir um projeto de vida</h3>
+          <p>É refletir sobre interesses, valores e objetivos, conhecer possibilidades de estudo e trabalho e planejar passos para alcançar metas.</p>
+        </article>
+      </div>
+      <div class="highlight"><strong>Ideia principal:</strong> educação para a vida não é saber tudo, mas desenvolver condições para aprender continuamente, fazer boas escolhas e contribuir com a comunidade.</div>
+    </section>
+
+    <section id="temas">
+      <div class="section-heading">
+        <span class="kicker">02 · Conhecimentos úteis</span>
+        <h2>O que podemos aprender?</h2>
+        <p>Estes temas mostram como os conhecimentos da escola podem ser aplicados em diferentes momentos da vida.</p>
+      </div>
+      <div class="topics-grid">
+        <article class="topic-card"><div class="topic-icon">💰</div><h3>Educação financeira</h3><p>Planejar gastos, diferenciar necessidades e desejos, economizar e tomar decisões responsáveis com o dinheiro.</p></article>
+        <article class="topic-card"><div class="topic-icon">🧠</div><h3>Autoconhecimento</h3><p>Reconhecer habilidades, interesses, emoções e pontos que podemos desenvolver.</p></article>
+        <article class="topic-card"><div class="topic-icon">🤝</div><h3>Convivência e respeito</h3><p>Praticar empatia, diálogo, cooperação e respeito às diferenças.</p></article>
+        <article class="topic-card"><div class="topic-icon">🩺</div><h3>Saúde e bem-estar</h3><p>Valorizar hábitos saudáveis, equilíbrio, prevenção e cuidado com a saúde física e emocional.</p></article>
+        <article class="topic-card"><div class="topic-icon">💻</div><h3>Educação digital</h3><p>Usar a tecnologia com responsabilidade, proteger dados e avaliar informações encontradas na internet.</p></article>
+        <article class="topic-card"><div class="topic-icon">🌎</div><h3>Cidadania e ambiente</h3><p>Conhecer direitos e deveres, cuidar dos espaços coletivos e adotar atitudes sustentáveis.</p></article>
+      </div>
+    </section>
+
+    <section id="bncc">
+      <div class="section-heading">
+        <span class="kicker">03 · Relação com a escola</span>
+        <h2>Educação para a Vida e a BNCC</h2>
+        <p>A Base Nacional Comum Curricular (BNCC) orienta as aprendizagens essenciais da Educação Básica. Suas dez competências gerais ajudam a promover uma formação integral, reunindo conhecimentos, habilidades, atitudes e valores.</p>
+      </div>
+      <div class="competencies">
+        <article class="competency-card"><span class="number">01</span><div><h3>Conhecimento</h3><p>Valorizar os conhecimentos e utilizá-los para compreender a realidade.</p></div></article>
+        <article class="competency-card"><span class="number">02</span><div><h3>Pensamento científico, crítico e criativo</h3><p>Investigar, fazer perguntas, analisar situações e criar soluções.</p></div></article>
+        <article class="competency-card"><span class="number">03</span><div><h3>Repertório cultural</h3><p>Conhecer e valorizar diferentes manifestações culturais e artísticas.</p></div></article>
+        <article class="competency-card"><span class="number">04</span><div><h3>Comunicação</h3><p>Expressar ideias e compartilhar informações por diferentes linguagens.</p></div></article>
+        <article class="competency-card"><span class="number">05</span><div><h3>Cultura digital</h3><p>Compreender e utilizar tecnologias digitais de forma crítica e responsável.</p></div></article>
+        <article class="competency-card"><span class="number">06</span><div><h3>Trabalho e projeto de vida</h3><p>Valorizar experiências e conhecimentos para fazer escolhas alinhadas à cidadania e ao próprio projeto de vida.</p></div></article>
+        <article class="competency-card"><span class="number">07</span><div><h3>Argumentação</h3><p>Defender ideias com fatos, dados e informações confiáveis, respeitando os direitos humanos.</p></div></article>
+        <article class="competency-card"><span class="number">08</span><div><h3>Autoconhecimento e autocuidado</h3><p>Conhecer-se e cuidar da saúde física e emocional, reconhecendo as próprias emoções.</p></div></article>
+        <article class="competency-card"><span class="number">09</span><div><h3>Empatia e cooperação</h3><p>Exercitar o diálogo, a compreensão, a resolução de conflitos e o respeito ao outro.</p></div></article>
+        <article class="competency-card"><span class="number">10</span><div><h3>Responsabilidade e cidadania</h3><p>Agir com autonomia, responsabilidade, flexibilidade e consciência ética e sustentável.</p></div></article>
+      </div>
+    </section>
+
+    <section id="atividade">
+      <div class="section-heading">
+        <span class="kicker">04 · Coloque em prática</span>
+        <h2>Meu próximo passo</h2>
+        <p>Pequenas atitudes podem ajudar a transformar um objetivo em realidade. Use a atividade para registrar uma meta e pensar em como começar.</p>
+      </div>
+      <div class="activity-wrap">
+        <article class="activity-card">
+          <div class="info-icon">🪜</div>
+          <h3>Como planejar uma meta?</h3>
+          <p>Uma meta fica mais clara quando sabemos o que queremos, por que isso importa e qual será a primeira atitude.</p>
+          <div class="steps">
+            <div class="step"><span>1</span><p><strong>Escolha:</strong> defina algo que deseja aprender ou melhorar.</p></div>
+            <div class="step"><span>2</span><p><strong>Organize:</strong> pense em um passo pequeno e possível.</p></div>
+            <div class="step"><span>3</span><p><strong>Pratique:</strong> coloque o plano em ação.</p></div>
+            <div class="step"><span>4</span><p><strong>Avalie:</strong> observe o que funcionou e o que pode mudar.</p></div>
+          </div>
+        </article>
+        <article class="activity-card">
+          <h3>Escreva sua meta</h3>
+          <p>Preencha os campos e veja seu plano aparecer abaixo. A informação fica apenas nesta página e não é enviada para nenhum servidor.</p>
+          <form class="goal-form" id="goalForm">
+            <label for="goal">O que você gostaria de alcançar?</label>
+            <input id="goal" name="goal" type="text" maxlength="100" placeholder="Ex.: aprender uma habilidade nova" required>
+            <label for="reason">Por que essa meta é importante?</label>
+            <textarea id="reason" name="reason" maxlength="250" placeholder="Explique em poucas palavras..." required></textarea>
+            <label for="firstStep">Qual será seu primeiro passo?</label>
+            <input id="firstStep" name="firstStep" type="text" maxlength="120" placeholder="Ex.: separar 20 minutos para estudar" required>
+            <button class="button submit-button" type="submit">Montar meu plano ✨</button>
+          </form>
+          <div class="goal-result" id="goalResult" aria-live="polite"></div>
+        </article>
+      </div>
+    </section>
+
+    <div class="quote">
+      <div class="quote-mark">“</div>
+      <p>O conhecimento ganha ainda mais valor quando se transforma em atitudes que melhoram a nossa vida e a vida das outras pessoas.</p>
+      <span>Educação para a Vida</span>
+    </div>
+
+    <section id="referencias">
+      <div class="section-heading">
+        <span class="kicker">05 · Para saber mais</span>
+        <h2>Referências e leitura</h2>
+        <p>Consulte a fonte oficial para conhecer o documento e entender melhor as competências gerais da Educação Básica.</p>
+      </div>
+      <div class="source-box">
+        <h3>Base Nacional Comum Curricular – Ministério da Educação</h3>
+        <p>Portal oficial da BNCC, com informações sobre sua organização, competências gerais e documentos para consulta.</p>
+        <a class="source-link" href="https://basenacionalcomum.mec.gov.br/" target="_blank" rel="noopener noreferrer">Acessar o portal oficial da BNCC ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Educação para a Vida – BNCC</strong></p>
+    <p class="small">Aprender hoje para construir possibilidades amanhã. | Projeto educativo</p>
+    <p class="small">© <span id="year"></span> · Conteúdo elaborado para fins educacionais.</p>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const navLinks = document.getElementById('navLinks');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? '✕' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = '☰';
+      });
+    });
+
+    document.getElementById('goalForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const goal = document.getElementById('goal').value.trim();
+      const reason = document.getElementById('reason').value.trim();
+      const firstStep = document.getElementById('firstStep').value.trim();
+      const result = document.getElementById('goalResult');
+
+      if (!goal || !reason || !firstStep) {
+        result.style.display = 'block';
+        result.textContent = 'Preencha todos os campos para montar seu plano.';
+        return;
+      }
+
+      result.innerHTML = `<strong>Seu plano está criado! 🎉</strong><br><br><strong>Minha meta:</strong> ${escapeHTML(goal)}<br><strong>Por que importa:</strong> ${escapeHTML(reason)}<br><strong>Primeiro passo:</strong> ${escapeHTML(firstStep)}<br><br>Um passo de cada vez. Você pode revisar seu plano sempre que precisar.`;
+      result.style.display = 'block';
+    });
+
+    function escapeHTML(value) {
+      return value.replace(/[&<>"']/g, (character) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+      })[character]);
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
